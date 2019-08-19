@@ -1,17 +1,12 @@
 #!/bin/bash
 
 # Creating Atlassian applications and data directory structure
-cd /opt/atlassian/
-mkdir apps
-mkdir data
-cd /opt/atlassian/apps
-mkdir jira
-mkdir confluence
-mkdir crowd
-cd /opt/atlassian/data
-mkdir jira
-mkdir confluence
-mkdir crowd
+sudo -u root mkdir -p /opt/atlassian/apps/confluence
+sudo -u root mkdir -p /opt/atlassian/apps/jira
+sudo -u root mkdir -p /opt/atlassian/apps/crowd
+sudo -u root mkdir -p /opt/atlassian/data/confluence
+sudo -u root mkdir -p /opt/atlassian/data/jira
+sudo -u root mkdir -p /opt/atlassian/data/crowd
 
 #creating 'atlassian' username all applications will run under
 useradd atlassian
