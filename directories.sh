@@ -1,19 +1,45 @@
 #!/bin/bash
 
-# Creating Atlassian applications and data directory structure
-sudo -u root mkdir -p /opt/atlassian/apps/confluence
-sudo -u root mkdir -p /opt/atlassian/apps/jira
-sudo -u root mkdir -p /opt/atlassian/apps/crowd
-sudo -u root mkdir -p /opt/atlassian/data/confluence
-sudo -u root mkdir -p /opt/atlassian/data/jira
-sudo -u root mkdir -p /opt/atlassian/data/crowd
+atlassiandir=/opt/atlassian
+echo $atlassiandir
+
+javadir=/opt/java
+echo $javadir
 
 #creating 'atlassian' username all applications will run under
-useradd atlassian
+if id "atlassian" >/dev/null 2>&1; then
+        echo "user 'atlassian' exists"
+else
+        echo "user 'atlassian' does not exist, creating new username"
+        useradd atlassian
+fi
 
-#changing directories ownership to 'atlassian' user
-cd /opt
-chown -R atlassian:atlassian atlassian
+# Creating Atlassian applications and data directory structure
+if [ -d "$atlassiandir" ]; then
+    echo "seems like /opt/atlassian directory already exist. not sure I want to mess with it, skipping Atlassian directory structure creation."
+else
+	echo "creating directories....."
+	sudo -u root mkdir -p $atlassiandir/apps/confluence
+	sudo -u root mkdir -p $atlassiandir/apps/jira
+	sudo -u root mkdir -p $atlassiandir/apps/crowd
+	sudo -u root mkdir -p $atlassiandir/data/confluence
+	sudo -u root mkdir -p $atlassiandir/data/jira
+	sudo -u root mkdir -p $atlassiandir/data/crowd
+	
+	#changing directories ownership to 'atlassian' user
+	echo "updating directory tree ownership..."
+	cd /opt
+	chown -R atlassian:atlassian atlassian
+	echo "atlassian applications directory structure has been created"
+fi
+
+
 
 # Creating Java directory
-mkdir /opt/java
+if [ -d "$javadir" ]; then
+   echo "seems like Java directory already exist. not sure I want to mess with it, skipping this part..."
+else
+	echo "creating Java directory..."
+	mkdir $javadir
+	echo "Java directory has been created"
+fi
