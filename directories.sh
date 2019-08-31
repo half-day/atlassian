@@ -22,9 +22,11 @@ else
 	sudo -u root mkdir -p $atlassiandir/apps/confluence
 	sudo -u root mkdir -p $atlassiandir/apps/jira
 	sudo -u root mkdir -p $atlassiandir/apps/crowd
+	sudo -u root mkdir -p $atlassiandir/apps/bitbucket
 	sudo -u root mkdir -p $atlassiandir/data/confluence
 	sudo -u root mkdir -p $atlassiandir/data/jira
 	sudo -u root mkdir -p $atlassiandir/data/crowd
+	sudo -u root mkdir -p $atlassiandir/data/bitbucket
 	
 	#changing directories ownership to 'atlassian' user
 	echo "updating directory tree ownership..."
